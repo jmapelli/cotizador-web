@@ -28,6 +28,6 @@ public class CotizacionDetalleEntity {
     private Double precio;
 
     @Column(nullable = false)
-    private Double subTotal;
+    private Double importe;
 
 }
