@@ -1,4 +1,4 @@
-<%--
+<%@ page import="pe.lizard.cotizador.auth.AuthLoginServlet" %><%--
   Created by IntelliJ IDEA.
   User: JosueAngel
   Date: 19/12/2017
@@ -16,8 +16,9 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-                    <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+                <a class="nav-link"
+                   href="<%=request.getContextPath()%>/auth?action=<%=AuthLoginServlet.ACTION_LOGOUT%>">
+                    <i class="fa fa-fw fa-sign-out"></i>Cerrar sesión</a>
             </li>
         </ul>
     </div>

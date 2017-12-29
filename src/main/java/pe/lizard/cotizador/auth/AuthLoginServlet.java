@@ -52,6 +52,7 @@ public class AuthLoginServlet extends HttpServlet {
 
             response.sendRedirect(request.getContextPath() + "/");
         } catch (Exception e) {
+            e.printStackTrace();
             ErrorUtil.handler(request, e);
             RequestDispatcher rd = request.getRequestDispatcher("/template/auth/login.jsp");
             rd.forward(request, response);
