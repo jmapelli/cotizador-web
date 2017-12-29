@@ -36,6 +36,9 @@ public class CotizacionEntity {
     private String solicitante;
 
     @Column(nullable = false)
+    private Double subtotal;
+
+    @Column(nullable = false)
     private Double igv;
 
     @Column(nullable = false)

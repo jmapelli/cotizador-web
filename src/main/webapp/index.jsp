@@ -48,7 +48,7 @@
         <div class="table-responsive">
             <div id="dataTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12" style="padding: 0;">
                         <table class="table table-bordered" cellspacing="0" style="width: 100%;">
                             <%--<thead style="background-color: #343a40; color: white;">--%>
                             <thead>
@@ -86,7 +86,8 @@
                 }, function (response) {
                     $('#listar_result').html(response);
                 }
-            );5
+            );
+            5
         });
 
         $('#nuevo').click(function (e) {

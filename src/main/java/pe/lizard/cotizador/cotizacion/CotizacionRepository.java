@@ -47,4 +47,32 @@ public class CotizacionRepository {
 
         return cotizaciones;
     }
+
+    public CotizacionEntity guardar(CotizacionEntity cotizacion) {
+        try {
+            em = Connection.getInstance();
+
+            em.getTransaction().begin();
+            em.persist(cotizacion);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            LOG.warning(e.getLocalizedMessage());
+        }
+
+        return cotizacion;
+    }
+
+    public CotizacionDetalleEntity guardarItem(CotizacionDetalleEntity item) {
+        try {
+            em = Connection.getInstance();
+
+            em.getTransaction().begin();
+            em.persist(item);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            LOG.warning(e.getLocalizedMessage());
+        }
+
+        return item;
+    }
 }

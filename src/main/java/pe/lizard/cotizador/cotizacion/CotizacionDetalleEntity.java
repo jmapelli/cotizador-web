@@ -19,7 +19,7 @@ public class CotizacionDetalleEntity {
     private Long id;
 
     @Column(nullable = false)
-    private Integer cantidad;
+    private Double cantidad;
 
     @Column(nullable = false)
     private String descripcion;
@@ -29,5 +29,9 @@ public class CotizacionDetalleEntity {
 
     @Column(nullable = false)
     private Double importe;
+
+    @ManyToOne(targetEntity = CotizacionEntity.class)
+    @JoinColumn(name = "COTIZACION", nullable = false)
+    private CotizacionEntity cotizacion;
 
 }
