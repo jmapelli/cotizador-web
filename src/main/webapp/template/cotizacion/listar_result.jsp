@@ -50,9 +50,9 @@
     <td>s/. <%=cotizacion.getTotal()%>
     </td>
     <td>
-        <a class="btn btn-success btn-xs" href="<%=request.getContextPath()+"/cotizacion/ver?id="+cotizacion.getId()%>"
+        <a class="btn btn-success btn-xs" href="<%=request.getContextPath()+"/cotizacion/editar?id="+cotizacion.getId()%>"
            style="color:  #fff;">
-            <i class="fa fa-eye"></i>
+            <i class="fa fa-pencil"></i>
         </a>
     </td>
 </tr>

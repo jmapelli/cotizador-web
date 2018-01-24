@@ -13,6 +13,7 @@
 %>
 
 <% for (CotizacionDetalleEntity item : items) { %>
+<% if (item.getEstado() == 1) { %>
 <tr>
     <td><%=item.getCantidad()%>
     </td>
@@ -23,11 +24,13 @@
     <td class="importe"><%=item.getImporte()%>
     </td>
     <td>
-        <a class="btn btn-success btn-xs btnEliminar" data-index="<%=items.indexOf(item)%>" style="color:  #fff;">
+        <a class="btn btn-success btn-xs btnEliminar" data-index="<%=items.indexOf(item)%>"
+           style="color:  #fff;">
             <i class="fa fa-trash"></i>
         </a>
     </td>
 </tr>
+<% }%>
 <% } %>
 
 <script>

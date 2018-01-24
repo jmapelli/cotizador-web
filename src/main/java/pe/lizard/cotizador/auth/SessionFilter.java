@@ -24,11 +24,13 @@ public class SessionFilter implements Filter {
         Pattern pattern = Pattern.compile("/auth.*||/assets.*");
         Matcher match = pattern.matcher(path);
 
-        if (request.getSession().getAttribute(SessionUtil.AUTHENTICATED) == null && !match.matches()) {
-            response.sendRedirect(request.getContextPath() + "/auth");
-        } else {
-            chain.doFilter(req, resp);
-        }
+//        if (request.getSession().getAttribute(SessionUtil.AUTHENTICATED) == null && !match.matches()) {
+//            response.sendRedirect(request.getContextPath() + "/auth");
+//        } else {
+//            chain.doFilter(req, resp);
+//        }
+
+        chain.doFilter(req, resp);
     }
 
     public void init(FilterConfig config) throws ServletException {

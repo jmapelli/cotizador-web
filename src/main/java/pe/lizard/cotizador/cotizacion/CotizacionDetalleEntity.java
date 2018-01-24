@@ -30,6 +30,9 @@ public class CotizacionDetalleEntity {
     @Column(nullable = false)
     private Double importe;
 
+    @Column(nullable = false)
+    private int estado;
+
     @ManyToOne(targetEntity = CotizacionEntity.class)
     @JoinColumn(name = "COTIZACION", nullable = false)
     private CotizacionEntity cotizacion;

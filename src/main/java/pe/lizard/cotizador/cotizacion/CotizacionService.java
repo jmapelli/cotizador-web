@@ -65,6 +65,42 @@ public class CotizacionService {
         return cotizacion;
     }
 
+    public CotizacionEntity editar(Long id, Double subtotal, Double igv, Double total,
+                                   List<CotizacionDetalleEntity> items) throws Exception {
+        cotizacionRepository = new CotizacionRepository();
+
+        if (subtotal == null || subtotal < 0.01) {
+            throw new Exception("El subtotal es invalido");
+        }
+
+        if (igv == null || igv < 0.01) {
+            throw new Exception("El igv es invalido");
+        }
+
+        if (total == null || total < 0.01) {
+            throw new Exception("El total es invalido");
+        }
+
+        CotizacionEntity cotizacion = new CotizacionEntity();
+        cotizacion.setId(id);
+        cotizacion.setSubtotal(subtotal);
+        cotizacion.setIgv(igv);
+        cotizacion.setTotal(total);
+
+        cotizacion = cotizacionRepository.editar(cotizacion);
+
+        for (CotizacionDetalleEntity item : items) {
+            if (item.getId() != null) {
+                cotizacionRepository.editarItem(item);
+            } else {
+                item.setCotizacion(cotizacion);
+                cotizacionRepository.guardarItem(item);
+            }
+        }
+
+        return cotizacion;
+    }
+
     public List<CotizacionEntity> findByCliente(String cliente) throws Exception {
         cotizacionRepository = new CotizacionRepository();
 
@@ -105,6 +141,7 @@ public class CotizacionService {
         item.setDescripcion(descripcion);
         item.setPrecio(precio);
         item.setImporte(item.getCantidad() * item.getPrecio());
+        item.setEstado(1);
 
         items.add(item);
 
@@ -113,9 +150,24 @@ public class CotizacionService {
 
     public List<CotizacionDetalleEntity> eliminarItem(Integer index, List<CotizacionDetalleEntity> items) throws Exception {
         CotizacionDetalleEntity item = items.get(index);
-        items.remove(item);
+
+        if (item.getId() != null) {
+            item.setEstado(0);
+        } else {
+            items.remove(item);
+        }
 
         return items;
+    }
+
+    public CotizacionEntity findById(Long idCotizacion) throws Exception {
+        cotizacionRepository = new CotizacionRepository();
+        return cotizacionRepository.findById(idCotizacion);
+    }
+
+    public List<CotizacionDetalleEntity> getItems(Long idCotizacion) {
+        cotizacionRepository = new CotizacionRepository();
+        return cotizacionRepository.getItems(idCotizacion);
     }
 
 }
