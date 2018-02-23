@@ -86,6 +86,7 @@
                             <%--<thead style="background-color: #343a40; color: white;">--%>
                             <thead>
                             <tr>
+                                <th>Orden trabajo</th>
                                 <th>Cantidad</th>
                                 <th>Descripción</th>
                                 <th>Precio uni.</th>
@@ -97,6 +98,8 @@
                             <% for (CotizacionDetalleEntity item : items) { %>
                             <% if (item.getEstado() == 1) { %>
                             <tr>
+                                <td><%=item.getNroOrdenTrabajo()%>
+                                </td>
                                 <td><%=item.getCantidad()%>
                                 </td>
                                 <td><%=item.getDescripcion()%>
@@ -200,6 +203,10 @@
                             <label>Precio unitario</label>
                             <input id="precio" type="number" step="0.01" type="text" class="form-control">
                         </div>
+                        <div class="col-md-12">
+                            <label>Nro orden trabajo</label>
+                            <input id="ot" type="text" type="text" class="form-control">
+                        </div>
                     </div>
                 </div>
                 <div id="agregar_item_result"></div>
@@ -229,7 +236,8 @@
                 action: '<%=CotizacionEditarServlet.ACTION_AGREGAR_ITEM%>',
                 cantidad: $('#cantidad').val(),
                 descripcion: $('#descripcion').val(),
-                precio: $('#precio').val()
+                precio: $('#precio').val(),
+                nroOrdenTrabajo: $('#ot').val()
             }, function (response) {
 
                 $.get('editar', {
@@ -245,6 +253,7 @@
                     $('#cantidad').val('');
                     $('#descripcion').val('');
                     $('#precio').val('');
+                    $('#ot').val('');
                     $('#subtotal').val('0');
                     $('#igv').val('0');
                     $('#total').val('0');

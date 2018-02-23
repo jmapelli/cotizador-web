@@ -79,10 +79,11 @@ public class CotizacionEditarServlet extends HttpServlet {
         Double cantidad = Double.parseDouble(request.getParameter("cantidad"));
         String descripcion = request.getParameter("descripcion");
         Double precio = Double.parseDouble(request.getParameter("precio"));
+        String nroOrdenTrabajo = request.getParameter("nroOrdenTrabajo");
         List<CotizacionDetalleEntity> items = (List) request.getSession().getAttribute("items");
 
         try {
-            items = cotizacionService.agregarItem(cantidad, descripcion, precio, items);
+            items = cotizacionService.agregarItem(cantidad, descripcion, precio, nroOrdenTrabajo, items);
             request.getSession().setAttribute("items", items);
         } catch (Exception e) {
             ErrorUtil.handler(request, e);

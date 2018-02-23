@@ -122,7 +122,8 @@ public class CotizacionService {
     }
 
     public List<CotizacionDetalleEntity> agregarItem(Double cantidad, String descripcion,
-                                                     Double precio, List<CotizacionDetalleEntity> items)
+                                                     Double precio, String nroOrdenTrabajo,
+                                                     List<CotizacionDetalleEntity> items)
             throws Exception {
         if (cantidad == null || cantidad < 0.01) {
             throw new Exception("La cantidad es invalida");
@@ -136,11 +137,18 @@ public class CotizacionService {
             throw new Exception("El precio es invalido");
         }
 
+        for (CotizacionDetalleEntity item : items) {
+            if (item.getNroOrdenTrabajo().equals(nroOrdenTrabajo)) {
+                throw new Exception("El nro. orden de trabajo es invalido");
+            }
+        }
+
         CotizacionDetalleEntity item = new CotizacionDetalleEntity();
         item.setCantidad(cantidad);
         item.setDescripcion(descripcion);
         item.setPrecio(precio);
         item.setImporte(item.getCantidad() * item.getPrecio());
+        item.setNroOrdenTrabajo(nroOrdenTrabajo);
         item.setEstado(1);
 
         items.add(item);

@@ -15,6 +15,8 @@
 <% for (CotizacionDetalleEntity item : items) { %>
 <% if (item.getEstado() == 1) { %>
 <tr>
+    <td><%=item.getNroOrdenTrabajo()%>
+    </td>
     <td><%=item.getCantidad()%>
     </td>
     <td><%=item.getDescripcion()%>

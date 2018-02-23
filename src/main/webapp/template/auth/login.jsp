@@ -16,7 +16,7 @@
     <div class="card card-login mx-auto mt-5">
         <div class="card-header">Iniciar sesión</div>
         <div class="card-body">
-            <form action="/auth" method="post">
+            <form action="auth" method="post">
                 <div class="form-group">
                     <label for="usuario">Usuario</label>
                     <input id="usuario" name="usuario" class="form-control" type="text">
