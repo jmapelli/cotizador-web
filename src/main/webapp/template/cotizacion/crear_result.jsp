@@ -29,7 +29,7 @@
                     <%=error_message%>
                 </div>
                 <% } else { %>
-                La cotizacion <b><%=cotizacion.getSerie()%>-<%=cotizacion.getNumero()%></b> ha sido creada.
+                La cotizacion <b><%=cotizacion.getNumero()%></b> ha sido creada.
                 <% } %>
             </div>
 

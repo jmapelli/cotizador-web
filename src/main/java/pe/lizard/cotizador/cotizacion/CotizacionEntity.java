@@ -22,7 +22,7 @@ public class CotizacionEntity {
     @Column(nullable = false)
     private String serie;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String numero;
 
     @Temporal(TemporalType.DATE)

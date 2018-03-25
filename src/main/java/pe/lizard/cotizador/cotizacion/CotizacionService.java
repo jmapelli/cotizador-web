@@ -14,9 +14,9 @@ public class CotizacionService {
                                     Double total, List<CotizacionDetalleEntity> items) throws Exception {
         cotizacionRepository = new CotizacionRepository();
 
-        if (serie == null || serie.isEmpty()) {
-            throw new Exception("La serie es invalida");
-        }
+//        if (serie == null || serie.isEmpty()) {
+//            throw new Exception("La serie es invalida");
+//        }
 
         if (numero == null || numero.isEmpty()) {
             throw new Exception("El numero es invalido");

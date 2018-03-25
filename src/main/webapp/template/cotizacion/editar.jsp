@@ -30,9 +30,9 @@
                 <div class="col-md-6">
                 </div>
                 <div class="col-sm-4 col-md-2">
-                    <label>Serie</label>
-                    <input id="serie" type="text" class="form-control" value="<%=cotizacion.getSerie()%>" readonly
-                           disabled>
+                    <%--<label>Serie</label>--%>
+                    <%--<input id="serie" type="text" class="form-control" value="<%=cotizacion.getSerie()%>" readonly--%>
+                           <%--disabled>--%>
                 </div>
                 <div class="col-sm-8 col-md-4">
                     <label>Número</label>
@@ -244,6 +244,8 @@
                     action: '<%=CotizacionEditarServlet.ACTION_LISTAR_ITEM%>'
                 }, function (response) {
                     $('#listar_result').html(response);
+
+                    calcular_pie_documento();
                 });
 
                 $('#agregar_item_result').html(response);
@@ -265,18 +267,6 @@
             });
         });
 
-        $('.btnEliminar').click(function () {
-            $.post('editar', {
-                action: '<%=CotizacionEditarServlet.ACTION_ELIMINAR_ITEM%>',
-                index: $(this).data('index')
-            }, function (response) {
-                $('#listar_result').html(response);
-                $('#subtotal').val('0');
-                $('#igv').val('0');
-                $('#total').val('0');
-            });
-        });
-
         $('#guardar').click(function () {
             $.post('editar', {
                 id: $('#id').val(),
@@ -291,5 +281,38 @@
         $('#cancelar').click(function () {
             document.location.href = '<%=request.getContextPath()%>/';
         });
+
+        function add_event_eliminar() {
+            $('.btnEliminar').click(function () {
+                $.post('editar', {
+                    action: '<%=CotizacionEditarServlet.ACTION_ELIMINAR_ITEM%>',
+                    index: $(this).data('index')
+                }, function (response) {
+                    $('#listar_result').html(response);
+
+                    calcular_pie_documento();
+                });
+            });
+        }
+
+        function calcular_pie_documento() {
+            var importes = $('.importe');
+            var importe_total = 0;
+
+            for (var i = 0; i < importes.length; i++) {
+                importe_total += parseFloat($(importes[i]).text());
+            }
+
+            $('#subtotal').val(format(importe_total));
+            $('#igv').val(format(importe_total * .18));
+            $('#total').val(format(importe_total * 1.18));
+        }
+
+        function format(value) {
+            value = parseFloat(value);
+            return value.toFixed(2);
+        }
+
+        add_event_eliminar();
     });
 </script>

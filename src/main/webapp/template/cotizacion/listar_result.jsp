@@ -37,8 +37,6 @@
     for (CotizacionEntity cotizacion : cotizaciones) {
 %>
 <tr>
-    <td><%=cotizacion.getSerie()%>
-    </td>
     <td><%=cotizacion.getNumero()%>
     </td>
     <td><%=DateUtil.toString("dd/MM/yyyy", cotizacion.getFecha())%>

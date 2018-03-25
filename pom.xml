@@ -45,6 +45,7 @@
     </developers>
 
     <build>
+        <finalName>zamalloa</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

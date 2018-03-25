@@ -20,8 +20,8 @@
                 <div class="col-md-6">
                 </div>
                 <div class="col-sm-4 col-md-2">
-                    <label>Serie</label>
-                    <input id="serie" type="text" class="form-control">
+                    <%--<label>Serie</label>--%>
+                    <%--<input id="serie" type="text" class="form-control">--%>
                 </div>
                 <div class="col-sm-8 col-md-4">
                     <label>Número</label>
@@ -95,7 +95,7 @@
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <label>Subtotal</label>
-                    <input id="subtotal" type="number" step="0.01" class="form-control" value="0">
+                    <input id="subtotal" type="number" step="0.01" class="form-control" value="0" readonly>
                 </div>
             </div>
         </div>
@@ -106,7 +106,7 @@
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <label>IGV (18%)</label>
-                    <input id="igv" type="number" step="0.01" class="form-control" value="0">
+                    <input id="igv" type="number" step="0.01" class="form-control" value="0" readonly>
                 </div>
             </div>
         </div>
@@ -117,7 +117,7 @@
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <label>Total</label>
-                    <input id="total" type="number" step="0.01" class="form-control" value="0">
+                    <input id="total" type="number" step="0.01" class="form-control" value="0" readonly>
                 </div>
             </div>
         </div>
@@ -205,6 +205,8 @@
                     action: '<%=CotizacionCrearServlet.ACTION_LISTAR_ITEM%>'
                 }, function (response) {
                     $('#listar_result').html(response);
+                    calcular_pie_documento();
+                    add_event_eliminar();
                 });
 
                 $('#agregar_item_result').html(response);
@@ -243,5 +245,36 @@
         $('#cancelar').click(function () {
             document.location.href = '<%=request.getContextPath()%>/';
         });
+
+        function add_event_eliminar() {
+            $('.btnEliminar').click(function () {
+                $.post('crear', {
+                    action: '<%=CotizacionCrearServlet.ACTION_ELIMINAR_ITEM%>',
+                    index: $(this).data('index')
+                }, function (response) {
+                    $('#listar_result').html(response);
+
+                    calcular_pie_documento();
+                });
+            });
+        }
+
+        function calcular_pie_documento() {
+            var importes = $('.importe');
+            var importe_total = 0;
+
+            for (var i = 0; i < importes.length; i++) {
+                importe_total += parseFloat($(importes[i]).text());
+            }
+
+            $('#subtotal').val(format(importe_total));
+            $('#igv').val(format(importe_total * .18));
+            $('#total').val(format(importe_total * 1.18));
+        }
+
+        function format(value) {
+            value = parseFloat(value);
+            return value.toFixed(2);
+        }
     });
 </script>

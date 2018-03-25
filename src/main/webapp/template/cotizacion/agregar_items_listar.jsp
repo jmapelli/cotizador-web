@@ -37,13 +37,6 @@
 
 <script>
     $(function () {
-        $('.btnEliminar').click(function () {
-            $.post('crear', {
-                action: '<%=CotizacionCrearServlet.ACTION_ELIMINAR_ITEM%>',
-                index: $(this).data('index')
-            }, function (response) {
-                $('#listar_result').html(response);
-            });
-        });
+
     });
 </script>

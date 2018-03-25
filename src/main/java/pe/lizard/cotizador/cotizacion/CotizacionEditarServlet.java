@@ -119,6 +119,8 @@ public class CotizacionEditarServlet extends HttpServlet {
             CotizacionEntity cotizacion = cotizacionService.findById(idCotizacion);
             List<CotizacionDetalleEntity> items = cotizacionService.getItems(idCotizacion);
 
+            System.out.println("############### hola #########"+items.size());
+
             request.setAttribute("cotizacion", cotizacion);
             request.getSession().setAttribute("items", items);
 

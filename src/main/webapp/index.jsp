@@ -53,7 +53,6 @@
                             <%--<thead style="background-color: #343a40; color: white;">--%>
                             <thead>
                             <tr role="row">
-                                <th>Serie</th>
                                 <th>Número</th>
                                 <th>Fecha</th>
                                 <th>Cliente</th>
