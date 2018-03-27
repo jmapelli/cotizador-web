@@ -121,6 +121,18 @@ public class CotizacionService {
         return cotizacionRepository.findBySolicitante(solicitante);
     }
 
+    public List<CotizacionEntity> findByFiltro(String numero_cotizacion, String fecha, String solicitante,
+                                               String sucursal, String cliente, String orden_trabajo) {
+        cotizacionRepository = new CotizacionRepository();
+        Date fecha_cotizacion = null;
+
+        if (fecha != null && !fecha.isEmpty()) {
+            fecha_cotizacion = DateUtil.toDate("yyyy-MM-dd", fecha);
+        }
+
+        return cotizacionRepository.findByFiltro(numero_cotizacion, fecha, solicitante, sucursal, cliente, orden_trabajo);
+    }
+
     public List<CotizacionDetalleEntity> agregarItem(Double cantidad, String descripcion,
                                                      Double precio, String nroOrdenTrabajo,
                                                      List<CotizacionDetalleEntity> items)

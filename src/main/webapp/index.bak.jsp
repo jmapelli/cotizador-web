@@ -21,39 +21,24 @@
             <hr>
 
             <div class="form-row">
-                <div class="col-md-4">
-                    <label>Número cotización:</label>
-                    <input id="numero_cotizacion" type="text" class="form-control">
+                <div class="col-md-5">
+                    <label>Buscar por</label>
+                    <select id="action" class="form-control">
+                        <option value="<%=CotizacionListarServlet.FINDBYCLIENTE%>">cliente</option>
+                        <option value="<%=CotizacionListarServlet.FINDBYSOLICITANTE%>">solicitante
+                        </option>
+                    </select>
                 </div>
-                <div class="col-md-4">
-                    <label>Fecha:</label>
-                    <input id="fecha" type="date" class="form-control">
-                </div>
-                <div class="col-md-4">
-                    <label>Solicitante:</label>
-                    <input id="solicitante" type="text" class="form-control">
-                </div>
-                <div class="col-md-4">
-                    <label>Sucursal:</label>
-                    <input id="sucursal" type="text" class="form-control">
-                </div>
-                <div class="col-md-4">
-                    <label>Cliente:</label>
-                    <input id="cliente" type="text" class="form-control">
-                </div>
-                <div class="col-md-4">
-                    <label>Orden de trabajo:</label>
-                    <input id="orden_trabajo" type="text" class="form-control">
-                </div>
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-3">
-                    <label></label>
-                    <button id="buscar" class="btn btn-primary btn-block">Buscar</button>
+                <div class="col-md-7">
+                    <label>Valor de busqueda</label>
+                    <div class="input-group">
+                        <input id="valor" type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button id="buscar" class="btn btn-primary" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -95,13 +80,8 @@
             e.preventDefault();
 
             $.get('cotizacion/listar', {
-                    action: '<%=CotizacionListarServlet.FINDBYFILTRO%>',
-                    numero_cotizacion: $('#numero_cotizacion').val(),
-                    fecha: $('#fecha').val(),
-                    solicitante: $('#solicitante').val(),
-                    sucursal: $('#sucursal').val(),
-                    cliente: $('#cliente').val(),
-                    orden_trabajo: $('#orden_trabajo').val()
+                    action: $('#action').val(),
+                    valor: $('#valor').val()
                 }, function (response) {
                     $('#listar_result').html(response);
                 }

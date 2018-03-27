@@ -4,6 +4,8 @@ import pe.lizard.cotizador.db.Connection;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -57,6 +59,59 @@ public class CotizacionRepository {
             String sql = "select * from cotizacion where solicitante like ?";
             Query q = em.createNativeQuery(sql, CotizacionEntity.class);
             q.setParameter(1, "%" + solicitante + "%");
+
+            cotizaciones = (List<CotizacionEntity>) q.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return cotizaciones;
+    }
+
+    public List<CotizacionEntity> findByFiltro(String numero_cotizacion, String fecha, String solicitante,
+                                               String sucursal, String cliente, String orden_trabajo) {
+        List<CotizacionEntity> cotizaciones = null;
+
+        try {
+            em = Connection.getInstance();
+
+            String sql = "select c.* from cotizacion c " +
+                    "inner join cotizacion_detalle cd on cd.cotizacion = c.id ";
+
+            List<String> list = new ArrayList<>();
+
+            if (!numero_cotizacion.isEmpty()) {
+                list.add(" c.numero like '" + numero_cotizacion + "%' ");
+            }
+
+            if (!fecha.isEmpty()) {
+                list.add(" c.fecha like '" + fecha + "' ");
+            }
+
+            if (!solicitante.isEmpty()) {
+                list.add(" c.solicitante like '" + solicitante + "%' ");
+            }
+
+            if (!sucursal.isEmpty()) {
+                list.add(" c.sucursal like '" + sucursal + "%' ");
+            }
+
+            if (!cliente.isEmpty()) {
+                list.add(" c.cliente like '" + cliente + "%' ");
+            }
+
+            if (!orden_trabajo.isEmpty()) {
+                list.add(" cd.NROORDENTRABAJO like '" + orden_trabajo + "%' and cd.estado = 1 ");
+            }
+
+            String where = "";
+            if (!list.isEmpty()) {
+                where = "where " + String.join(" and ", list);
+            }
+
+            sql += where + " group by c.id ";
+
+            Query q = em.createNativeQuery(sql, CotizacionEntity.class);
 
             cotizaciones = (List<CotizacionEntity>) q.getResultList();
         } catch (Exception e) {
