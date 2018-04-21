@@ -17,6 +17,16 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <a class="nav-link"
+                   href="<%=request.getContextPath()%>/">
+                    <i class="fa fa-fw fa-home"></i>Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   href="<%=request.getContextPath()%>/cotizacion/reporte">
+                    <i class="fa fa-fw fa-pie-chart"></i>Reportes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
                    href="<%=request.getContextPath()%>/auth?action=<%=AuthLoginServlet.ACTION_LOGOUT%>">
                     <i class="fa fa-fw fa-sign-out"></i>Cerrar sesión</a>
             </li>

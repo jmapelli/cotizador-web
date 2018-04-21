@@ -19,7 +19,7 @@ public class CotizacionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String serie;
 
     @Column(nullable = true)

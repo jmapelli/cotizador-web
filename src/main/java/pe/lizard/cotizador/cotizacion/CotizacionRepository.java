@@ -32,40 +32,82 @@ public class CotizacionRepository {
         return cotizacion;
     }
 
-    public List<CotizacionEntity> findByCliente(String cliente) {
-        List<CotizacionEntity> cotizaciones = null;
+    public List<CotizacionDetalleEntity> findByNroCotizacion(String nroCotizacion) {
+        List<CotizacionDetalleEntity> detalle = null;
 
         try {
             em = Connection.getInstance();
 
-            String sql = "select * from cotizacion where cliente like ?";
-            Query q = em.createNativeQuery(sql, CotizacionEntity.class);
-            q.setParameter(1, "%" + cliente + "%");
+            String sql = "select cd.* from cotizacion_detalle cd " +
+                    "inner join cotizacion c on c.id = cd.cotizacion " +
+                    "where c.numero like ?";
+            Query q = em.createNativeQuery(sql, CotizacionDetalleEntity.class);
+            q.setParameter(1, nroCotizacion + "%");
 
-            cotizaciones = (List<CotizacionEntity>) q.getResultList();
+            detalle = (List<CotizacionDetalleEntity>) q.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return cotizaciones;
+        return detalle;
     }
 
-    public List<CotizacionEntity> findBySolicitante(String solicitante) {
-        List<CotizacionEntity> cotizaciones = null;
+    public List<CotizacionDetalleEntity> findByCliente(String cliente) {
+        List<CotizacionDetalleEntity> detalle = null;
 
         try {
             em = Connection.getInstance();
 
-            String sql = "select * from cotizacion where solicitante like ?";
-            Query q = em.createNativeQuery(sql, CotizacionEntity.class);
-            q.setParameter(1, "%" + solicitante + "%");
+            String sql = "select cd.* from cotizacion_detalle cd " +
+                    "inner join cotizacion c on c.id = cd.cotizacion " +
+                    "where c.cliente like ?";
+            Query q = em.createNativeQuery(sql, CotizacionDetalleEntity.class);
+            q.setParameter(1, cliente + "%");
 
-            cotizaciones = (List<CotizacionEntity>) q.getResultList();
+            detalle = (List<CotizacionDetalleEntity>) q.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return cotizaciones;
+        return detalle;
+    }
+
+    public List<CotizacionDetalleEntity> findBySolicitante(String solicitante) {
+        List<CotizacionDetalleEntity> detalle = null;
+
+        try {
+            em = Connection.getInstance();
+
+            String sql = "select cd.* from cotizacion_detalle cd " +
+                    "inner join cotizacion c on c.id = cd.cotizacion " +
+                    "where c.solicitante like ?";
+            Query q = em.createNativeQuery(sql, CotizacionDetalleEntity.class);
+            q.setParameter(1, solicitante + "%");
+
+            detalle = (List<CotizacionDetalleEntity>) q.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return detalle;
+    }
+
+    public CotizacionDetalleEntity findByOrdenTrabajo(String ordenTrabajo) {
+        CotizacionDetalleEntity detalle = null;
+
+        try {
+            em = Connection.getInstance();
+
+            String sql = "select * from cotizacion_detalle where nroOrdenTrabajo like ?";
+            Query q = em.createNativeQuery(sql, CotizacionDetalleEntity.class);
+            q.setParameter(1, ordenTrabajo);
+
+            detalle = (CotizacionDetalleEntity) q.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return detalle;
     }
 
     public List<CotizacionEntity> findByFiltro(String numero_cotizacion, String fecha, String solicitante,

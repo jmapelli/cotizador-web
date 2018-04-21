@@ -101,7 +101,17 @@ public class CotizacionService {
         return cotizacion;
     }
 
-    public List<CotizacionEntity> findByCliente(String cliente) throws Exception {
+    public List<CotizacionDetalleEntity> findByNroCotizacion(String nroCotizacion) throws Exception {
+        cotizacionRepository = new CotizacionRepository();
+
+        if (nroCotizacion == null || nroCotizacion.isEmpty()) {
+            throw new Exception("El nro de cotizacion invalido");
+        }
+
+        return cotizacionRepository.findByNroCotizacion(nroCotizacion);
+    }
+
+    public List<CotizacionDetalleEntity> findByCliente(String cliente) throws Exception {
         cotizacionRepository = new CotizacionRepository();
 
         if (cliente == null || cliente.isEmpty()) {
@@ -111,7 +121,7 @@ public class CotizacionService {
         return cotizacionRepository.findByCliente(cliente);
     }
 
-    public List<CotizacionEntity> findBySolicitante(String solicitante) throws Exception {
+    public List<CotizacionDetalleEntity> findBySolicitante(String solicitante) throws Exception {
         cotizacionRepository = new CotizacionRepository();
 
         if (solicitante == null || solicitante.isEmpty()) {
@@ -119,6 +129,16 @@ public class CotizacionService {
         }
 
         return cotizacionRepository.findBySolicitante(solicitante);
+    }
+
+    public CotizacionDetalleEntity findByOrdenTrabajo(String ordenTrabajo) throws Exception {
+        cotizacionRepository = new CotizacionRepository();
+
+        if (ordenTrabajo == null || ordenTrabajo.isEmpty()) {
+            throw new Exception("El nro orden trabajo es invalido");
+        }
+
+        return cotizacionRepository.findByOrdenTrabajo(ordenTrabajo);
     }
 
     public List<CotizacionEntity> findByFiltro(String numero_cotizacion, String fecha, String solicitante,

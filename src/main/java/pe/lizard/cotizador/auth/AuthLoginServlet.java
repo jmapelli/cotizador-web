@@ -6,7 +6,6 @@ import pe.lizard.cotizador.util.ErrorUtil;
 import pe.lizard.cotizador.util.ServletUtil;
 import pe.lizard.cotizador.util.SessionUtil;
 
-import javax.jms.Session;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
