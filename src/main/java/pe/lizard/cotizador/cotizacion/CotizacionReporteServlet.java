@@ -103,7 +103,7 @@ public class CotizacionReporteServlet extends HttpServlet {
         try {
             String ordenTrabajo = request.getParameter("valor");
 
-            CotizacionDetalleEntity detalle = cotizacionService.findByOrdenTrabajo(ordenTrabajo);
+            List<CotizacionDetalleEntity> detalle = cotizacionService.findByOrdenTrabajo(ordenTrabajo);
             request.setAttribute("detalle", detalle);
         } catch (Exception e) {
             ErrorUtil.handler(request, e);

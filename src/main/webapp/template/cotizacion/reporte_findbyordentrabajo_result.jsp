@@ -11,7 +11,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    CotizacionDetalleEntity detalle = (CotizacionDetalleEntity) request.getAttribute("detalle");
+    List<CotizacionDetalleEntity> detalle = (List<CotizacionDetalleEntity>) request.getAttribute("detalle");
 %>
 
 <% if (detalle != null) { %>
@@ -20,20 +20,20 @@
         <div class="col-md-3">
             <label>Fecha:</label>
             <input type="text" class="form-control"
-                   value="<%=DateUtil.toString("dd-MM-yyyy",detalle.getCotizacion().getFecha())%>" readonly/>
+                   value="<%=DateUtil.toString("dd-MM-yyyy",detalle.get(0).getCotizacion().getFecha())%>" readonly/>
         </div>
         <div class="col-md-3">
             <label>Solicitado por:</label>
             <input type="text" class="form-control"
-                   value="<%=detalle.getCotizacion().getSolicitante()%>" readonly/>
+                   value="<%=detalle.get(0).getCotizacion().getSolicitante()%>" readonly/>
         </div>
         <div class="col-md-3">
             <label>Sucursal:</label>
-            <input type="text" class="form-control" value="<%=detalle.getCotizacion().getSucursal()%>" readonly/>
+            <input type="text" class="form-control" value="<%=detalle.get(0).getCotizacion().getSucursal()%>" readonly/>
         </div>
         <div class="col-md-3">
             <label>Cliente:</label>
-            <input type="text" class="form-control" value="<%=detalle.getCotizacion().getCliente()%>" readonly/>
+            <input type="text" class="form-control" value="<%=detalle.get(0).getCotizacion().getCliente()%>" readonly/>
         </div>
     </div>
 </div>
@@ -57,22 +57,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <% if (detalle.getEstado() == 1) { %>
+                    <% for (CotizacionDetalleEntity item : detalle) { %>
+                    <% if (item.getEstado() == 1) { %>
                     <tr>
-                        <td><%=detalle.getNroOrdenTrabajo()%>
+                        <td><%=item.getNroOrdenTrabajo()%>
                         </td>
-                        <td><%=detalle.getCotizacion().getCliente()%>
+                        <td><%=item.getCotizacion().getCliente()%>
                         </td>
-                        <td><%=detalle.getCantidad()%>
+                        <td><%=item.getCantidad()%>
                         </td>
-                        <td><%=detalle.getDescripcion()%>
+                        <td><%=item.getDescripcion()%>
                         </td>
-                        <td><%=detalle.getPrecio()%>
+                        <td><%=item.getPrecio()%>
                         </td>
-                        <td class="importe"><%=detalle.getImporte()%>
+                        <td class="importe"><%=item.getImporte()%>
                         </td>
                     </tr>
                     <% }%>
+                    <% } %>
                     </tbody>
                 </table>
             </div>

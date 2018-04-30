@@ -131,7 +131,7 @@ public class CotizacionService {
         return cotizacionRepository.findBySolicitante(solicitante);
     }
 
-    public CotizacionDetalleEntity findByOrdenTrabajo(String ordenTrabajo) throws Exception {
+    public List<CotizacionDetalleEntity> findByOrdenTrabajo(String ordenTrabajo) throws Exception {
         cotizacionRepository = new CotizacionRepository();
 
         if (ordenTrabajo == null || ordenTrabajo.isEmpty()) {

@@ -92,17 +92,19 @@ public class CotizacionRepository {
         return detalle;
     }
 
-    public CotizacionDetalleEntity findByOrdenTrabajo(String ordenTrabajo) {
-        CotizacionDetalleEntity detalle = null;
+    public List<CotizacionDetalleEntity> findByOrdenTrabajo(String ordenTrabajo) {
+        List<CotizacionDetalleEntity> detalle = null;
 
         try {
             em = Connection.getInstance();
 
-            String sql = "select * from cotizacion_detalle where nroOrdenTrabajo like ?";
+            String sql = "select * from cotizacion_detalle where nroOrdenTrabajo like '" + ordenTrabajo + "%' ";
             Query q = em.createNativeQuery(sql, CotizacionDetalleEntity.class);
-            q.setParameter(1, ordenTrabajo);
+            //q.setParameter(1, ordenTrabajo);
 
-            detalle = (CotizacionDetalleEntity) q.getSingleResult();
+            //detalle = (CotizacionDetalleEntity) q.getSingleResult();
+			detalle = (List<CotizacionDetalleEntity>) q.getResultList();
+			
         } catch (Exception e) {
             e.printStackTrace();
         }
