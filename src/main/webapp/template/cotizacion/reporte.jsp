@@ -13,7 +13,7 @@
     <div class="container-fluid">
         <div class="form-group">
             <div class="form-row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label>Buscar por:</label>
                     <select id="action" class="form-control">
                         <option value="<%=CotizacionReporteServlet.FINDBYCOTIZACION%>">Cotización</option>
@@ -22,13 +22,17 @@
                         <option value="<%=CotizacionReporteServlet.FINDBYORDENTRABAJO%>">Orden de trabajo</option>
                     </select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <label>Valor:</label>
                     <input id="valor" type="text" class="form-control">
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label>&nbsp;&nbsp;</label>
                     <button id="buscar" class="btn btn-primary btn-block">Buscar</button>
+                </div>
+                <div class="col-md-2">
+                    <label>&nbsp;&nbsp;</label>
+                    <button id="download" class="btn btn-primary btn-block">Download</button>
                 </div>
             </div>
         </div>
@@ -45,13 +49,18 @@
         $('#buscar').click(function (e) {
             e.preventDefault();
 
-            $.post('reporte', {
+            $.get('reporte', {
                     action: $('#action').val(),
                     valor: $('#valor').val()
                 }, function (response) {
                     $('#result').html(response);
                 }
             );
+        });
+
+        $('#download').click(function (e) {
+            e.preventDefault();
+            window.location = 'reporte/download?action=' + $('#action').val() + '&valor=' + $('#valor').val();
         });
     });
 </script>

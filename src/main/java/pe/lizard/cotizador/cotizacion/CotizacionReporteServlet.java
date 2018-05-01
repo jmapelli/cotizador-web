@@ -22,6 +22,10 @@ public class CotizacionReporteServlet extends HttpServlet {
     public CotizacionService cotizacionService = null;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = ServletUtil.getAction(request);
 
         switch (action) {
@@ -37,11 +41,10 @@ public class CotizacionReporteServlet extends HttpServlet {
             case FINDBYORDENTRABAJO:
                 this.doGetFindByOrdenTrabajo(request, response);
                 break;
+            default:
+                this.doGetDefault(request, response);
+                break;
         }
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.doGetDefault(request, response);
     }
 
     private void doGetDefault(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
