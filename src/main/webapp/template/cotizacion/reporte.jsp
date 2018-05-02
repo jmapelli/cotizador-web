@@ -30,10 +30,6 @@
                     <label>&nbsp;&nbsp;</label>
                     <button id="buscar" class="btn btn-primary btn-block">Buscar</button>
                 </div>
-                <div class="col-md-2">
-                    <label>&nbsp;&nbsp;</label>
-                    <button id="download" class="btn btn-primary btn-block">Download</button>
-                </div>
             </div>
         </div>
 
